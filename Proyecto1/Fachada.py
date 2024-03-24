@@ -17,6 +17,11 @@ def comprobarId(id):
                   if(id == row[0]):
                      return True           
         return False
+
+
+"""
+Interfaz con la que interactua el usuario
+"""
 #--------------------------------------------------------------------------------------------------
  #Interfaz
 salida = False
@@ -31,6 +36,8 @@ while(salida == False):
       print("7. Borrar todos los productos")
       print("8. Salir")
       opcion = input()
+      #---------------------------------------------------------------------------------------------------------
+            #Opcion 1 dar de alta un producto
       if opcion == "1":            
             id = input("Ingresa el id del producto\n")
             if comprobarId(id) == False:
@@ -55,13 +62,22 @@ while(salida == False):
                   
             else:
                   print("El id ingresado ya existe vuelva a intentarlo.")
-            
+                  
+      #---------------------------------------------------------------------------------------------------------
+           #Opcion 2 ver todo el inventario      
       elif opcion == "2":
            vertodoInventario = inv.Inventario()
            vertodoInventario.mostrarTodo()
+
+      #---------------------------------------------------------------------------------------------------------
+           #Opcion 3 ver inventario por año y mes
       elif opcion == "3":
            verinvAñoMes = invAñoMes.InventarioAñoMes()
-           verinvAñoMes.mostrarTodo()            
+           verinvAñoMes.mostrarTodo()
+
+
+      #----------------------------------------------------------------------------------------------------------
+           #Opcion 4 eliminar un producto            
       elif opcion == "4":
             id = input("Ingresa el id del producto\n")
             if comprobarId(id) == True:
@@ -76,10 +92,17 @@ while(salida == False):
                       print("Operacion cancelada")
             else:
                   print("El id ingresado no existe.")
+
+
+      #----------------------------------------------------------------------------------------------------------
+         #Opcion 5 buscar un producto
       elif opcion == "5":
             id_producto = input("Ingresa el id del producto\n")
             busqueda = bus.Buscar(id_producto)
             busqueda.busqueda()  
+
+      #----------------------------------------------------------------------------------------------------------
+            #Opcion 6 actualizar un producto
       elif opcion == "6":
             id = input("Ingresa el id del producto\n")
             if comprobarId(id) == True:
@@ -87,6 +110,9 @@ while(salida == False):
                  actualizar.actualizar(id)                 
             else:
                   print("El id ingresado no existe.")
+
+      #----------------------------------------------------------------------------------------------------------
+            #Opcion 7 borrar todos los productos
       elif opcion == "7":
             print("Esta accion borrara todo su inventario ¿Desea continuar?")
             print("1.Si")
@@ -97,9 +123,15 @@ while(salida == False):
                   elimina_todo.elimina_todo()
             else:
                   print("Operacion cancelada")            
+      
+      #----------------------------------------------------------------------------------------------------------
+            #Opcion 8 salir
       elif opcion == "8":
             print("Cerrando el programa...")
             salida = True
+
+      #----------------------------------------------------------------------------------------------------------
+            #Opcion invalida
       else:
             print("Opcion invalida, vuelve a intentarlo.")
     

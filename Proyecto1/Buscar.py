@@ -1,8 +1,18 @@
 import csv
 class Buscar:
+    """
+    Metodo constructor
+    Recibe un id
+    Devuelve un objeto de la clase Buscar
+    """
     def __init__(self,id):
         self.id = id
-        
+    
+    """
+    Metodo busqueda,busca un producto en especifico guiandose por el id
+    Recibe un id
+    Devuelve los datos del producto si este existe
+    """
     def busqueda(self):   
         valor = ["Id", "Producto", "Precio", "Cantidad", "Dia", "Mes", "Año"] 
         i = 0   

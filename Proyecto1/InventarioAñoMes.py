@@ -1,9 +1,19 @@
 import csv
 
 class InventarioAñoMes:
+    """
+    Metodo constructor
+    No recibe parametros
+    No devuelve nada
+    """
     def __init__(self):
         pass
-
+    
+    """
+    Metodo mostrarTodo, muestra todos los productor en Tienda.csv por orden de año y mes
+    No recibe parametros
+    Devuelve los datos de todos los productos en orden cronologico
+    """
     def mostrarTodo(self):        
         meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", 
                  "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
@@ -74,7 +84,7 @@ class InventarioAñoMes:
         print("\n")
         while(salida3 != True):            
             print(f"{meses[mes-1]} \n")
-            for producto in ordenada1:
+            for producto in ordenada3:
                 i = 0                
                 if int(producto[5]) == mes:
                     for sub in producto:

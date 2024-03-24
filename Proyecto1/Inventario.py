@@ -1,10 +1,19 @@
 import csv 
 
 class Inventario:
-
+    """
+    Metodo constructor
+    No recibe parametros
+    No devuelve nada
+    """
     def __init__(self):
         pass
 
+    """
+    Metodo mostrarTodo, muestra todos los productos en Tienda.csv en orden alfabetico
+    No recibe parametros
+    Devuelve los datos de todos los productos
+    """
     def mostrarTodo(self):
         inventario = []
         valor = ["Id", "Producto", "Precio", "Cantidad", "Dia", "Mes", "Año"] 

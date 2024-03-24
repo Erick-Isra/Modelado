@@ -21,11 +21,11 @@ class Actualizar:
             filas_actualizadas = []
             producto_actualizado = []             
             print("Escoge una de las siguientes opciones")
-            print("1. Actualizae codigo de barras")
-            print("2. Actualizar nombre del producto")
-            print("3. Actualizar cantidad del producto")
-            print("4. Actualizar precio del prodcuto")
-            print("5. Actualizar fecha de caducidad")
+            print("1. Actualizar el  codigo de barras")
+            print("2. Actualizar el nombre del producto")
+            print("3. Actualizar la cantidad del producto")
+            print("4. Actualizar el precio del prodcuto")
+            print("5. Actualizar la fecha de caducidad")
             print("6. Salir")
             opcion = input()            
             if opcion == "1":
@@ -172,7 +172,7 @@ class Actualizar:
             elif opcion == "6":
                 salida = True
             else:
-                print("Opcion no valida")
+                print("Opcion invalida, vuelve a intentarlo")
             
 
         
