@@ -6,18 +6,8 @@ import Eliminar as elim
 import Inventario as inv
 import InventarioAñoMes as invAñoMes
 import Actualizar as act
-"""
-Funcion que nos ayuda a comprobar si un id ya existe en el arcihvo Tienda.csv
-"""
-def comprobarId(id):    
-        with open('Tienda.csv') as csvfile:
-            reader=csv.reader(csvfile)
-            for row in reader:
-                if row:
-                  if(id == row[0]):
-                     return True           
-        return False
-
+import ComprobarId as comprobarId
+import Producto as prod
 
 """
 Interfaz con la que interactua el usuario
@@ -38,30 +28,38 @@ while(salida == False):
       opcion = input()
       #---------------------------------------------------------------------------------------------------------
             #Opcion 1 dar de alta un producto
-      if opcion == "1":            
-            id = input("Ingresa el id del producto\n")
-            if comprobarId(id) == False:
-                  producto = str(input("Ingresa el nombre producto\n"))
-                  precio = float(input("Ingresa el precio del producto\n"))
-                  num = int(input("Ingresa la cantidad del producto\n"))
-                  cantidad = "(" + str(num) + " unidades" + ")"
-                  dia = int(input("Ingresa el dia de caducidad\n"))
-                  if dia >= 1 and dia <= 31:
-                        mes = int(input("Ingresa el mes de caducidad\n"))
-                        if mes >= 1 and mes <= 12:
-                          año = int(input("Ingresa el año de caducidad\n")) 
-                          if año >= 2025 and año <= 2027:                    
-                            nuevo_producto = alt.Alta(id, producto, precio, cantidad, dia, mes, año)
-                            nuevo_producto.agregar_producto(id, producto, precio, cantidad, dia, mes, año)
-                          else:
-                               print("El año ingresado no es valido.")
-                        else:
-                              print("El mes ingresado no es valido")
-                  else:
-                        print("El dia ingresado no es valido.")       
-                  
+      if opcion == "1":    
+            id = input("Ingresa el id del producto\n").upper()
+            comprobar = comprobarId.ComprobarId(id)    
+            nuevo_producto = prod.Producto()            
+            if comprobar.comprobarId(id) == False:
+                  try:
+                          nuevo_producto.setid(id)
+                          producto = input("Ingresa el nombre producto\n")
+                          nuevo_producto.setNombre(producto)                            
+                          precio = input("Ingresa el precio del producto\n")
+                          nuevo_producto.setPrecio(precio)
+                          num = input("Ingresa la cantidad del producto\n")
+                          nuevo_producto.setCantidad(num)
+                          cantidad = nuevo_producto.getCantidad()
+                          dia = input("Ingresa el dia de caducidad\n")
+                          nuevo_producto.setDia(dia)
+                          mes = input("Ingresa el mes de caducidad\n")
+                          nuevo_producto.setMes(mes)
+                          año = input("Ingresa el año de caducidad\n")
+                          nuevo_producto.setAño(año)
+                          nuevo_producto = alt.Alta(id, producto, precio,cantidad , dia, mes, año)
+                          nuevo_producto.agregar_producto(id, producto, precio, cantidad, dia, mes, año)
+                          
+                  except ValueError as e:
+                      print(f"Error: {e}")
+                      print("Por favor, intenta de nuevo.") 
+                    
             else:
-                  print("El id ingresado ya existe vuelva a intentarlo.")
+                    print("El ID ingresado ya existe en el sistema. Por favor, intenta con otro.")
+            
+                  
+            
                   
       #---------------------------------------------------------------------------------------------------------
            #Opcion 2 ver todo el inventario      
@@ -79,8 +77,9 @@ while(salida == False):
       #----------------------------------------------------------------------------------------------------------
            #Opcion 4 eliminar un producto            
       elif opcion == "4":
-            id = input("Ingresa el id del producto\n")
-            if comprobarId(id) == True:
+            id = input("Ingresa el id del producto, recuerda poner todo en mayusculas\n")
+            comprobar = comprobarId.ComprobarId(id)  
+            if comprobar.comprobarId(id) == True:
                  print("Estas seguro de eliminar este producto?")
                  print("1.Si")
                  print("2.No")
@@ -97,15 +96,16 @@ while(salida == False):
       #----------------------------------------------------------------------------------------------------------
          #Opcion 5 buscar un producto
       elif opcion == "5":
-            id_producto = input("Ingresa el id del producto\n")
+            id_producto = input("Ingresa el id del producto, recuerda poner todo en mayusculas\n")
             busqueda = bus.Buscar(id_producto)
             busqueda.busqueda()  
 
       #----------------------------------------------------------------------------------------------------------
             #Opcion 6 actualizar un producto
       elif opcion == "6":
-            id = input("Ingresa el id del producto\n")
-            if comprobarId(id) == True:
+            id = input("Ingresa el id del producto,  recuerda poner todo en mayusculas\n")
+            comprobar = comprobarId.ComprobarId(id)  
+            if comprobar.comprobarId(id) == True:
                  actualizar = act.Actualizar(id)
                  actualizar.actualizar(id)                 
             else:
